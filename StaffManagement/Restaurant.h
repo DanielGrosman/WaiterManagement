@@ -13,7 +13,7 @@
 @interface Restaurant : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet *staff;
+@property (nonatomic, retain) NSMutableSet *staff;
 @end
 
 @interface Restaurant (CoreDataGeneratedAccessors)

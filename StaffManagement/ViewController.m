@@ -10,28 +10,38 @@
 #import "Restaurant.h"
 #import "RestaurantManager.h"
 #import "Waiter.h"
+#import "AppDelegate.h"
 
 static NSString * const kCellIdentifier = @"CellIdentifier";
 
-@interface ViewController ()
+@interface ViewController () <UITableViewDelegate>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *waiters;
+@property (nonatomic) Restaurant *currentRestaurant;
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.leftBarButtonItem = self.editButtonItem;
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 #pragma mark - TableView Data Source
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -45,4 +55,40 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     cell.textLabel.text = waiter.name;
     return cell;
 }
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    
+    if(editing == YES)
+    {
+        [self.tableView setEditing:true];
+    } else {
+        [self.tableView setEditing:false];
+    }
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.tableView.isEditing) {
+    return YES;
+    }
+    else {
+        return NO;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        NSError *error = nil;
+        Waiter *waiter = self.waiters[indexPath.row];
+        [appDelegate.managedObjectContext deleteObject:waiter];;
+        [self.currentRestaurant removeStaffObject:waiter];
+        [appDelegate.managedObjectContext save:&error];
+        [tableView reloadData];
+    }
+    [tableView reloadData];
+}
+
+
 @end

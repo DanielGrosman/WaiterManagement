@@ -39,8 +39,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="42R-mQ-lOt">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="2Hv-Tt-OU1"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dlo-z8-75x"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="dlo-z8-75x">
+                            <connections>
+                                <segue destination="bNr-vc-04C" kind="presentation" id="TSn-Aq-lw6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="idB-MD-rVO" id="ugC-k3-Uqe"/>
@@ -49,6 +52,51 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="789.60000000000002" y="28.335832083958024"/>
+        </scene>
+        <!--Add Waiter View Controller-->
+        <scene sceneID="3ci-c9-ICk">
+            <objects>
+                <viewController id="bNr-vc-04C" customClass="AddWaiterViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3Td-Kz-prU"/>
+                        <viewControllerLayoutGuide type="bottom" id="v7a-tt-QLJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3ZR-Gd-KDt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9k-kK-aTD">
+                                <rect key="frame" x="16" y="165" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UV-th-XGh">
+                                <rect key="frame" x="170" y="270" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveWaiter:" destination="bNr-vc-04C" eventType="touchUpInside" id="xSs-7o-LTK"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add a new waiter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-wp-TxO">
+                                <rect key="frame" x="122" y="123" width="131" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameTextField" destination="t9k-kK-aTD" id="ljY-Yb-p9y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hC3-K1-V0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1568.8" y="28.335832083958024"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ppq-ve-Kp1">
