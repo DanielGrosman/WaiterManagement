@@ -25,15 +25,20 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
-    NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
-    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
-    self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self loadTableViewData];
+}
+
+-(void) loadTableViewData {
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+    NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
+    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
+//    [self reloadInputViews];
     [self.tableView reloadData];
 }
 
@@ -85,9 +90,9 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
         [appDelegate.managedObjectContext deleteObject:waiter];;
         [self.currentRestaurant removeStaffObject:waiter];
         [appDelegate.managedObjectContext save:&error];
-        [tableView reloadData];
+        [self loadTableViewData];
     }
-    [tableView reloadData];
+        [self.tableView reloadData];
 }
 
 

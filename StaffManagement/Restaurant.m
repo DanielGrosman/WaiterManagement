@@ -16,7 +16,7 @@
 
 
 - (void)addStaffObject:(NSManagedObject *)value {
-    [self.staff setByAddingObject:value];
+    [self.staff addObject:value];
 }
 
 - (void)removeStaffObject:(NSManagedObject *)value {
