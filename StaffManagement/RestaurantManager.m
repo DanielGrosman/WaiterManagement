@@ -35,6 +35,7 @@
         if(results.count > 0){
             aRestaurant = results[0];
         }
+        
         else{
             NSEntityDescription *restaurantEntity = [NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:appDelegate.managedObjectContext];
             NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:appDelegate.managedObjectContext];
@@ -50,4 +51,5 @@
     }
     return self.restaurant;
 }
+
 @end

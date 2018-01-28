@@ -14,4 +14,14 @@
 @dynamic name;
 @dynamic staff;
 
+
+- (void)addStaffObject:(NSManagedObject *)value {
+    [self.staff addObject:value];
+}
+
+- (void)removeStaffObject:(NSManagedObject *)value {
+    [self.staff removeObject:value];
+}
+
+
 @end
