@@ -11,13 +11,15 @@
 #import "RestaurantManager.h"
 #import "Waiter.h"
 #import "AppDelegate.h"
+#import "StaffManagement-Swift.h"
 
-static NSString * const kCellIdentifier = @"CellIdentifier";
+//static NSString * const kCellIdentifier = @"CellIdentifier";
 
 @interface ViewController () <UITableViewDelegate>
 @property IBOutlet UITableView *tableView;
 @property (nonatomic, retain) NSArray *waiters;
 @property (nonatomic) Restaurant *currentRestaurant;
+@property (nonatomic) Waiter *waiter;
 @end
 
 @implementation ViewController
@@ -34,7 +36,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 }
 
 -(void) loadTableViewData {
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
     self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
@@ -55,9 +57,9 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     return self.waiters.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
-    Waiter *waiter = self.waiters[indexPath.row];
-    cell.textLabel.text = waiter.name;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    self.waiter = self.waiters[indexPath.row];
+    cell.textLabel.text = self.waiter.name;
     return cell;
 }
 
@@ -95,5 +97,16 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
         [self.tableView reloadData];
 }
 
+#pragma mark - Prepare for Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"waiterShifts"]) {
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        self.waiter = self.waiters[indexPath.row];
+        WaiterShiftViewController *vc = [segue destinationViewController];
+        vc.waiter = self.waiter;
+        vc.waiterName = self.waiter.name;
+}
+}
 
 @end

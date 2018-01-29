@@ -14,5 +14,10 @@
 
 @dynamic name;
 @dynamic restaurant;
+@dynamic shifts;
+
+- (void)addShiftObject:(NSManagedObject *)value {
+    [self.shifts addObject:value];
+}
 
 @end
