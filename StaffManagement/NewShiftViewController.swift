@@ -19,16 +19,16 @@ class NewShiftViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        startDatePicker.setValue(UIColor.white, forKeyPath: "textColor")
         
     }
 
 
     @IBAction func saveShift(_ sender: Any) {
         
-        var appDelegate = UIApplication.shared.delegate as? AppDelegate
-        var error: Error? = nil
-        var shiftEntity = NSEntityDescription.entity(forEntityName: "Shift", in: appDelegate?.managedObjectContext ?? NSManagedObjectContext())
-        var newShift = Shift(entity: shiftEntity!, insertInto: appDelegate?.managedObjectContext)
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let shiftEntity = NSEntityDescription.entity(forEntityName: "Shift", in: appDelegate?.managedObjectContext ?? NSManagedObjectContext())
+        let newShift = Shift(entity: shiftEntity!, insertInto: appDelegate?.managedObjectContext)
         newShift.startTime = startDatePicker.date
         newShift.endTime = endDatePicker.date
         newShift.waiter = currentWaiter

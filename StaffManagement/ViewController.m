@@ -40,7 +40,6 @@
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
     self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
-//    [self reloadInputViews];
     [self.tableView reloadData];
 }
 
@@ -98,14 +97,12 @@
 }
 
 #pragma mark - Prepare for Segue
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"waiterShifts"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         self.waiter = self.waiters[indexPath.row];
         WaiterShiftViewController *vc = [segue destinationViewController];
         vc.waiter = self.waiter;
-        vc.waiterName = self.waiter.name;
 }
 }
 

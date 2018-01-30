@@ -13,10 +13,10 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     var shifts = [Any]()
     var waiter = Waiter ()
-    var waiterName = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,14 +38,20 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
         let cell: ShiftTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for: indexPath) as? ShiftTableViewCell 
         let currentShift = shifts[indexPath.row]
         let dateFormatter = DateFormatter ()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .short
-        let startDateString = dateFormatter.string(from: (currentShift as AnyObject).startTime)
-        let endDateString = dateFormatter.string(from: (currentShift as AnyObject).endTime)
-        cell?.startLabel.text = startDateString
-        cell?.endLabel.text = endDateString
+        dateFormatter.timeStyle = DateFormatter.Style.none
+        dateFormatter.dateStyle = DateFormatter.Style.long
+        cell?.startDate.text = dateFormatter.string(from: (currentShift as AnyObject).startTime)
+        cell?.endDate.text = dateFormatter.string(from: (currentShift as AnyObject).endTime)
+        
+        let timeFormatter = DateFormatter ()
+        timeFormatter.timeStyle = DateFormatter.Style.short
+        timeFormatter.dateStyle = DateFormatter.Style.none
+        cell?.startTime.text = timeFormatter.string(from: (currentShift as AnyObject).startTime)
+        cell?.endTime.text = timeFormatter.string(from: (currentShift as AnyObject).endTime)
+
         return cell!
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "addShift") {
