@@ -63,7 +63,7 @@
                     <navigationItem key="navigationItem" id="42R-mQ-lOt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dlo-z8-75x">
                             <connections>
-                                <segue destination="bNr-vc-04C" kind="presentation" id="TSn-Aq-lw6"/>
+                                <segue destination="bNr-vc-04C" kind="show" id="TSn-Aq-lw6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -87,25 +87,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NcU-v4-EE2">
+                                <rect key="frame" x="0.0" y="329" width="375" height="338"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UV-th-XGh">
+                                        <rect key="frame" x="157" y="154" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveWaiter:" destination="bNr-vc-04C" eventType="touchUpInside" id="xSs-7o-LTK"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.36470588240000001" green="0.73725490199999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9k-kK-aTD">
-                                <rect key="frame" x="16" y="165" width="343" height="30"/>
+                                <rect key="frame" x="33" y="183" width="309" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UV-th-XGh">
-                                <rect key="frame" x="170" y="270" width="34" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add a New Waiter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-wp-TxO">
+                                <rect key="frame" x="106" y="97" width="163" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <action selector="saveWaiter:" destination="bNr-vc-04C" eventType="touchUpInside" id="xSs-7o-LTK"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add a new waiter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-wp-TxO">
-                                <rect key="frame" x="122" y="123" width="131" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -235,7 +245,7 @@
                     <navigationItem key="navigationItem" title="Shifts" id="qdZ-L0-Ual">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="kt9-OD-4nV">
                             <connections>
-                                <segue destination="ZQM-UV-KcK" kind="presentation" identifier="addShift" id="xe9-jV-Qtp"/>
+                                <segue destination="ZQM-UV-KcK" kind="show" identifier="addShift" id="xe9-jV-Qtp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -247,10 +257,10 @@
             </objects>
             <point key="canvasLocation" x="789.60000000000002" y="799.2503748125938"/>
         </scene>
-        <!--New Shift View Controller-->
+        <!--Add a Shift-->
         <scene sceneID="WMx-uV-ccd">
             <objects>
-                <viewController id="ZQM-UV-KcK" customClass="NewShiftViewController" customModule="StaffManagement" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Add a Shift" id="ZQM-UV-KcK" customClass="NewShiftViewController" customModule="StaffManagement" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SE0-Tu-hWn"/>
                         <viewControllerLayoutGuide type="bottom" id="WEH-0K-dRH"/>
@@ -260,40 +270,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shift End Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5R-fz-yul">
-                                <rect key="frame" x="103" y="347" width="169" height="33"/>
+                                <rect key="frame" x="103" y="371" width="169" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lpG-7S-U2i">
-                                <rect key="frame" x="0.0" y="0.0" width="376" height="311"/>
+                                <rect key="frame" x="0.0" y="64" width="376" height="274"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="byz-NZ-PhS">
-                                        <rect key="frame" x="1" y="91" width="375" height="191"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <date key="date" timeIntervalSinceReferenceDate="538819242.88666904">
-                                            <!--2018-01-28 08:00:42 +0000-->
-                                        </date>
-                                    </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shift Start Time" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VF6-3D-e0D">
-                                        <rect key="frame" x="92" y="38" width="192" height="36"/>
+                                        <rect key="frame" x="92" y="25" width="192" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="byz-NZ-PhS">
+                                        <rect key="frame" x="0.0" y="75" width="375" height="180"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="538819242.88666904">
+                                            <!--2018-01-28 08:00:42 +0000-->
+                                        </date>
+                                    </datePicker>
                                 </subviews>
                                 <color key="backgroundColor" red="0.36470588240000001" green="0.73725490199999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="JuT-u8-ynf">
-                                <rect key="frame" x="1" y="397" width="375" height="191"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="538819248.62600398">
-                                    <!--2018-01-28 08:00:48 +0000-->
-                                </date>
-                            </datePicker>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bim-ke-wqq">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -312,6 +315,13 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.1334631741" green="0.1823148429" blue="0.25190103050000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="JuT-u8-ynf">
+                                <rect key="frame" x="0.0" y="418" width="375" height="180"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="538819248.62600398">
+                                    <!--2018-01-28 08:00:48 +0000-->
+                                </date>
+                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>

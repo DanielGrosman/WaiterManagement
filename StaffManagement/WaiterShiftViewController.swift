@@ -23,6 +23,7 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewWillAppear(animated)
         shifts = Array(waiter.shifts)
         tableView.reloadData()
+        self.navigationItem.title = "\(self.waiter.name!)'s Shifts"
     }
     
     
@@ -37,6 +38,7 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ShiftTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for: indexPath) as? ShiftTableViewCell 
         let currentShift = shifts[indexPath.row]
+        
         let dateFormatter = DateFormatter ()
         dateFormatter.timeStyle = DateFormatter.Style.none
         dateFormatter.dateStyle = DateFormatter.Style.long

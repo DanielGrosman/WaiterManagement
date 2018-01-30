@@ -35,7 +35,7 @@
     newWaiter.restaurant = self.currentRestaurant;
     [self.currentRestaurant addStaffObject:newWaiter];
     [appDelegate.managedObjectContext save:&error];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES]; 
 }
 
 
