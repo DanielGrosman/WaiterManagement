@@ -27,7 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    // Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.title = @"Waiter List";
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 -(void) viewWillAppear:(BOOL)animated {
@@ -59,6 +60,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     self.waiter = self.waiters[indexPath.row];
     cell.textLabel.text = self.waiter.name;
+    cell.textLabel.textColor = [UIColor whiteColor];
+        if (indexPath.row %2 == 0) {
+            cell.backgroundColor = [UIColor colorWithRed:0.36 green:0.74 blue:0.82 alpha:1.0];
+        }  else {
+            cell.backgroundColor = [UIColor colorWithRed:0.13 green:0.18 blue:0.25 alpha:1.0];
+            }
+    
     return cell;
 }
 
