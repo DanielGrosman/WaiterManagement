@@ -10,10 +10,11 @@ import UIKit
 
 class ShiftTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var startDate: UILabel!
-    @IBOutlet weak var endDate: UILabel!
-    @IBOutlet weak var startTime: UILabel!
-    @IBOutlet weak var endTime: UILabel!
+
+    @IBOutlet weak var shiftDateLabel: UILabel!
+    @IBOutlet weak var shiftMonthLabel: UILabel!
+    @IBOutlet weak var shiftYearLabel: UILabel!
+    @IBOutlet weak var shiftTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

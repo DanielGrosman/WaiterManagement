@@ -39,7 +39,7 @@ class NewShiftViewController: UIViewController {
         catch {
             print(error)
         }
-        dismiss(animated: true) {() -> Void in }
+        navigationController?.popViewController(animated: true)
     }
     
 }

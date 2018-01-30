@@ -36,20 +36,27 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: ShiftTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for: indexPath) as? ShiftTableViewCell 
+        let cell: ShiftTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for: indexPath) as? ShiftTableViewCell
+        
+        sortShifts()
         let currentShift = shifts[indexPath.row]
         
-        let dateFormatter = DateFormatter ()
-        dateFormatter.timeStyle = DateFormatter.Style.none
-        dateFormatter.dateStyle = DateFormatter.Style.long
-        cell?.startDate.text = dateFormatter.string(from: (currentShift as AnyObject).startTime)
-        cell?.endDate.text = dateFormatter.string(from: (currentShift as AnyObject).endTime)
+        let monthDateFormatter = DateFormatter()
+        monthDateFormatter.dateFormat = "LLLL"
+        cell?.shiftMonthLabel.text = monthDateFormatter.string(from: (currentShift as AnyObject).startTime)
+        
+        let dayDateFormatter = DateFormatter()
+        dayDateFormatter.dateFormat = "dd"
+        cell?.shiftDateLabel.text = dayDateFormatter.string(from: (currentShift as AnyObject).startTime)
+        
+        let yearDateFormatter = DateFormatter()
+        yearDateFormatter.dateFormat = "YYYY"
+        cell?.shiftYearLabel.text = yearDateFormatter.string(from: (currentShift as AnyObject).startTime)
         
         let timeFormatter = DateFormatter ()
         timeFormatter.timeStyle = DateFormatter.Style.short
         timeFormatter.dateStyle = DateFormatter.Style.none
-        cell?.startTime.text = timeFormatter.string(from: (currentShift as AnyObject).startTime)
-        cell?.endTime.text = timeFormatter.string(from: (currentShift as AnyObject).endTime)
+        cell?.shiftTimeLabel.text = "\(timeFormatter.string(from: (currentShift as AnyObject).startTime)) - \(timeFormatter.string(from: (currentShift as AnyObject).endTime))"
 
         return cell!
     }
@@ -60,6 +67,10 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
             let vc = segue.destination as? NewShiftViewController
             vc?.currentWaiter = self.waiter
         }
+    }
+    
+    func sortShifts() {
+        shifts.sort() { ($1 as AnyObject).startTime > ($0 as AnyObject).startTime }
     }
     
     
