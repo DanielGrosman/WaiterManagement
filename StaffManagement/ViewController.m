@@ -13,7 +13,7 @@
 #import "AppDelegate.h"
 #import "StaffManagement-Swift.h"
 
-//static NSString * const kCellIdentifier = @"CellIdentifier";
+static NSString * const kCellIdentifier = @"CellIdentifier";
 
 @interface ViewController () <UITableViewDelegate>
 @property IBOutlet UITableView *tableView;
@@ -37,7 +37,7 @@
 }
 
 -(void) loadTableViewData {
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
     NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
     self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
     self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
@@ -57,15 +57,15 @@
     return self.waiters.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
     self.waiter = self.waiters[indexPath.row];
     cell.textLabel.text = self.waiter.name;
     cell.textLabel.textColor = [UIColor whiteColor];
-        if (indexPath.row %2 == 0) {
-            cell.backgroundColor = [UIColor colorWithRed:0.36 green:0.74 blue:0.82 alpha:1.0];
-        }  else {
-            cell.backgroundColor = [UIColor colorWithRed:0.13 green:0.18 blue:0.25 alpha:1.0];
-            }
+    if (indexPath.row %2 == 0) {
+        cell.backgroundColor = [UIColor colorWithRed:0.36 green:0.74 blue:0.82 alpha:1.0];
+    }  else {
+        cell.backgroundColor = [UIColor colorWithRed:0.13 green:0.18 blue:0.25 alpha:1.0];
+    }
     
     return cell;
 }
@@ -84,7 +84,7 @@
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
-    return YES;
+        return YES;
     }
     else {
         return NO;
@@ -101,7 +101,11 @@
         [appDelegate.managedObjectContext save:&error];
         [self loadTableViewData];
     }
-        [self.tableView reloadData];
+    [self.tableView reloadData];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"waiterShifts" sender:self];
 }
 
 #pragma mark - Prepare for Segue
@@ -111,7 +115,7 @@
         self.waiter = self.waiters[indexPath.row];
         WaiterShiftViewController *vc = [segue destinationViewController];
         vc.waiter = self.waiter;
-}
+    }
 }
 
 @end
