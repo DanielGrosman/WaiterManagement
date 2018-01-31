@@ -27,12 +27,14 @@
 }
 
 - (IBAction)saveWaiter:(UIButton *)sender {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    AppDelegate *appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
     NSError *error = nil;
     NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:appDelegate.managedObjectContext];
+    // save the new waiter to core data
     Waiter *newWaiter = [[Waiter alloc]initWithEntity:waiterEntity insertIntoManagedObjectContext:appDelegate.managedObjectContext];
     newWaiter.name = self.nameTextField.text;
     newWaiter.restaurant = self.currentRestaurant;
+    // add the waiter to the current restaurant's list of staff
     [self.currentRestaurant addStaffObject:newWaiter];
     [appDelegate.managedObjectContext save:&error];
     [self.navigationController popToRootViewControllerAnimated:YES]; 

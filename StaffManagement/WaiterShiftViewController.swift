@@ -14,19 +14,39 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     var shifts = [Any]()
     var waiter = Waiter ()
     
+    let monthDateFormatter = DateFormatter()
+    let dayDateFormatter = DateFormatter()
+    let yearDateFormatter = DateFormatter()
+    let timeFormatter = DateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        shifts = Array(waiter.shifts)
+        setupDateFormatters()
+        sortShifts()
+        tableView.reloadData()
+        self.navigationItem.title = "\(self.waiter.name!)'s Shifts"
         self.tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        shifts = Array(waiter.shifts)
-        tableView.reloadData()
-        self.navigationItem.title = "\(self.waiter.name!)'s Shifts"
+        viewDidLoad()
     }
     
+    func setupDateFormatters () {
+        monthDateFormatter.dateFormat = "LLLL"
+        dayDateFormatter.dateFormat = "dd"
+        yearDateFormatter.dateFormat = "YYYY"
+        timeFormatter.timeStyle = DateFormatter.Style.short
+        timeFormatter.dateStyle = DateFormatter.Style.none
+    }
     
+    func sortShifts() {
+        shifts.sort() { ($1 as AnyObject).startTime > ($0 as AnyObject).startTime }
+    }
+    
+    // MARK: - TableView Data Source
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -38,41 +58,22 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: ShiftTableViewCell? = tableView.dequeueReusableCell(withIdentifier: "shiftCell", for: indexPath) as? ShiftTableViewCell
         
-        sortShifts()
         let currentShift = shifts[indexPath.row]
         
-        let monthDateFormatter = DateFormatter()
-        monthDateFormatter.dateFormat = "LLLL"
         cell?.shiftMonthLabel.text = monthDateFormatter.string(from: (currentShift as AnyObject).startTime)
-        
-        let dayDateFormatter = DateFormatter()
-        dayDateFormatter.dateFormat = "dd"
         cell?.shiftDateLabel.text = dayDateFormatter.string(from: (currentShift as AnyObject).startTime)
-        
-        let yearDateFormatter = DateFormatter()
-        yearDateFormatter.dateFormat = "YYYY"
         cell?.shiftYearLabel.text = yearDateFormatter.string(from: (currentShift as AnyObject).startTime)
-        
-        let timeFormatter = DateFormatter ()
-        timeFormatter.timeStyle = DateFormatter.Style.short
-        timeFormatter.dateStyle = DateFormatter.Style.none
         cell?.shiftTimeLabel.text = "\(timeFormatter.string(from: (currentShift as AnyObject).startTime)) - \(timeFormatter.string(from: (currentShift as AnyObject).endTime))"
 
         return cell!
     }
     
-    
+    // MARK: - Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "addShift") {
             let vc = segue.destination as? NewShiftViewController
             vc?.currentWaiter = self.waiter
         }
     }
-    
-    func sortShifts() {
-        shifts.sort() { ($1 as AnyObject).startTime > ($0 as AnyObject).startTime }
-    }
-    
-    
     
 }

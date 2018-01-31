@@ -10,7 +10,6 @@ import UIKit
 
 class ShiftTableViewCell: UITableViewCell {
 
-
     @IBOutlet weak var shiftDateLabel: UILabel!
     @IBOutlet weak var shiftMonthLabel: UILabel!
     @IBOutlet weak var shiftYearLabel: UILabel!

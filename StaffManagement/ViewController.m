@@ -26,6 +26,13 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
+    NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
+    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
+    self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
+    [self.tableView reloadData];
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     self.navigationItem.title = @"Waiter List";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -33,20 +40,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self loadTableViewData];
-}
-
--(void) loadTableViewData {
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:kCellIdentifier];
-    NSSortDescriptor *sortByName = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:YES];
-    self.waiters = [[[RestaurantManager sharedManager]currentRestaurant].staff sortedArrayUsingDescriptors:@[sortByName]];
-    self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
-    [self.tableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self viewDidLoad];
 }
 
 #pragma mark - TableView Data Source
@@ -58,9 +52,12 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCellIdentifier forIndexPath:indexPath];
+    
     self.waiter = self.waiters[indexPath.row];
     cell.textLabel.text = self.waiter.name;
     cell.textLabel.textColor = [UIColor whiteColor];
+    
+    // alternating background colours
     if (indexPath.row %2 == 0) {
         cell.backgroundColor = [UIColor colorWithRed:0.36 green:0.74 blue:0.82 alpha:1.0];
     }  else {
@@ -70,6 +67,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     return cell;
 }
 
+// set the tableView's editing mode ot 'on' when the edit button is clicked, and 'off' when editing is complete
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
@@ -82,6 +80,7 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
     }
 }
 
+// only allow editing when the edit button is clicked
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     if (self.tableView.isEditing) {
         return YES;
@@ -93,15 +92,17 @@ static NSString * const kCellIdentifier = @"CellIdentifier";
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        AppDelegate *appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
         NSError *error = nil;
         Waiter *waiter = self.waiters[indexPath.row];
-        [appDelegate.managedObjectContext deleteObject:waiter];;
+        // delete the waiter from core data
+        [appDelegate.managedObjectContext deleteObject:waiter];
+        // remove the water from the restaurants list of staff
         [self.currentRestaurant removeStaffObject:waiter];
         [appDelegate.managedObjectContext save:&error];
-        [self loadTableViewData];
+        // call viewDidLoad to refresh the list of staff
+        [self viewDidLoad];
     }
-    [self.tableView reloadData];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
