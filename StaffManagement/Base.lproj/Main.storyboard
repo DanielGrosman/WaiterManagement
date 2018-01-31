@@ -71,7 +71,7 @@
                                 <rect key="frame" x="0.0" y="320" width="375" height="347"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5UV-th-XGh">
-                                        <rect key="frame" x="157" y="154" width="60" height="39"/>
+                                        <rect key="frame" x="157" y="49" width="60" height="39"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,42 +84,51 @@
                                 <color key="backgroundColor" red="0.36470588240000001" green="0.73725490199999999" blue="0.82352941180000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="5UV-th-XGh" secondAttribute="trailing" constant="158" id="45F-ZI-5up"/>
-                                    <constraint firstItem="5UV-th-XGh" firstAttribute="top" secondItem="NcU-v4-EE2" secondAttribute="top" constant="154" id="Qkd-tT-vG8"/>
-                                    <constraint firstAttribute="bottom" secondItem="5UV-th-XGh" secondAttribute="bottom" constant="154" id="ReL-Ry-vph"/>
+                                    <constraint firstItem="5UV-th-XGh" firstAttribute="top" secondItem="NcU-v4-EE2" secondAttribute="top" constant="49" id="Qkd-tT-vG8"/>
+                                    <constraint firstAttribute="bottom" secondItem="5UV-th-XGh" secondAttribute="bottom" constant="259" id="ReL-Ry-vph"/>
                                     <constraint firstItem="5UV-th-XGh" firstAttribute="leading" secondItem="NcU-v4-EE2" secondAttribute="leading" constant="157" id="WtR-2O-3MA"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9k-kK-aTD">
-                                <rect key="frame" x="40" y="183" width="294" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add a New Waiter" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Od9-wp-TxO">
                                 <rect key="frame" x="107.5" y="99" width="160.5" height="23"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t9k-kK-aTD">
+                                <rect key="frame" x="77" y="178" width="221" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Od9-wp-TxO" firstAttribute="top" secondItem="3Td-Kz-prU" secondAttribute="bottom" constant="35" id="2Pg-NS-iTh"/>
                             <constraint firstItem="Od9-wp-TxO" firstAttribute="centerX" secondItem="3ZR-Gd-KDt" secondAttribute="centerX" id="4OA-YW-uVQ"/>
-                            <constraint firstItem="t9k-kK-aTD" firstAttribute="leading" secondItem="3ZR-Gd-KDt" secondAttribute="leadingMargin" constant="24" id="74f-9D-08x"/>
+                            <constraint firstItem="t9k-kK-aTD" firstAttribute="leading" secondItem="3ZR-Gd-KDt" secondAttribute="leadingMargin" constant="61" id="74f-9D-08x"/>
                             <constraint firstAttribute="trailing" secondItem="NcU-v4-EE2" secondAttribute="trailing" id="RQp-TT-IRf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="t9k-kK-aTD" secondAttribute="trailing" constant="25" id="W2M-1o-L3R"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="t9k-kK-aTD" secondAttribute="trailing" constant="61" id="W2M-1o-L3R"/>
                             <constraint firstItem="NcU-v4-EE2" firstAttribute="leading" secondItem="3ZR-Gd-KDt" secondAttribute="leading" id="XxK-jd-PNu"/>
-                            <constraint firstItem="t9k-kK-aTD" firstAttribute="top" secondItem="Od9-wp-TxO" secondAttribute="bottom" constant="61" id="Y3H-NO-Un0"/>
+                            <constraint firstItem="t9k-kK-aTD" firstAttribute="top" secondItem="Od9-wp-TxO" secondAttribute="bottom" constant="56" id="Y3H-NO-Un0"/>
                             <constraint firstItem="v7a-tt-QLJ" firstAttribute="top" secondItem="NcU-v4-EE2" secondAttribute="bottom" id="jWT-ZC-Wty"/>
                             <constraint firstItem="t9k-kK-aTD" firstAttribute="centerX" secondItem="3ZR-Gd-KDt" secondAttribute="centerX" id="mAK-PG-KPS"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="b33-nn-67K" appends="YES" id="Ek1-uB-eRA"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="nameTextField" destination="t9k-kK-aTD" id="ljY-Yb-p9y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hC3-K1-V0e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="b33-nn-67K">
+                    <connections>
+                        <action selector="dismissKeyboard:" destination="bNr-vc-04C" id="a5t-ST-cj6"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1568.8" y="28.335832083958024"/>
         </scene>

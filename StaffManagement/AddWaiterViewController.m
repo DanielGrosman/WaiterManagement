@@ -13,7 +13,7 @@
 #import "RestaurantManager.h"
 
 
-@interface AddWaiterViewController ()
+@interface AddWaiterViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (strong,nonatomic) Restaurant *currentRestaurant;
 
@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.currentRestaurant = [[RestaurantManager sharedManager]currentRestaurant];
+    self.nameTextField.delegate = self;
 }
 
 - (IBAction)saveWaiter:(UIButton *)sender {
@@ -39,6 +40,18 @@
     [appDelegate.managedObjectContext save:&error];
     [self.navigationController popToRootViewControllerAnimated:YES]; 
 }
+
+// tap on the screen to dismiss the keyboard
+- (IBAction)dismissKeyboard:(id)sender {
+    [self.nameTextField resignFirstResponder];
+}
+
+// hit enter on the keyboard to dismiss it
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.nameTextField resignFirstResponder];
+    return true;
+}
+
 
 
 @end
