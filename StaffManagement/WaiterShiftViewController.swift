@@ -12,7 +12,7 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var tableView: UITableView!
     var shifts = [Any]()
-    var waiter = Waiter ()
+    var waiter : Waiter?
     
     let monthDateFormatter = DateFormatter()
     let dayDateFormatter = DateFormatter()
@@ -21,11 +21,11 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shifts = Array(waiter.shifts)
+        shifts = Array(waiter!.shifts)
         setupDateFormatters()
         sortShifts()
         tableView.reloadData()
-        self.navigationItem.title = "\(self.waiter.name!)'s Shifts"
+        self.navigationItem.title = "\(self.waiter!.name ?? "Waiter")'s Shifts"
         self.tableView.separatorStyle = .none
     }
     
@@ -76,7 +76,7 @@ class WaiterShiftViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "addShift") {
             let vc = segue.destination as? NewShiftViewController
-            vc?.currentWaiter = self.waiter
+            vc?.currentWaiter = self.waiter!
         }
     }
     

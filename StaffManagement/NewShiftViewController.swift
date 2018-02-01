@@ -13,7 +13,7 @@ class NewShiftViewController: UIViewController {
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var endDatePicker: UIDatePicker!
     
-    var currentWaiter = Waiter ()
+     var currentWaiter : Waiter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class NewShiftViewController: UIViewController {
         newShift.endTime = endDatePicker.date
         newShift.waiter = currentWaiter
         // add the shift the the waiter's list of shifts
-        currentWaiter.addShiftObject(newShift)
+        currentWaiter?.addShiftObject(newShift)
         do {
         try appDelegate?.managedObjectContext.save()
         }
