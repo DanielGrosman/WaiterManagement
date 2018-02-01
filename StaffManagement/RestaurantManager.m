@@ -28,13 +28,14 @@
     {
         Restaurant *aRestaurant;
         NSError *error = nil;
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        AppDelegate *appDelegate = (AppDelegate*) [UIApplication sharedApplication].delegate;
         NSFetchRequest *request = [[NSFetchRequest alloc]initWithEntityName:@"Restaurant"];
         NSArray *results = [appDelegate.managedObjectContext executeFetchRequest:request error:&error];
         
         if(results.count > 0){
             aRestaurant = results[0];
         }
+        
         else{
             NSEntityDescription *restaurantEntity = [NSEntityDescription entityForName:@"Restaurant" inManagedObjectContext:appDelegate.managedObjectContext];
             NSEntityDescription *waiterEntity = [NSEntityDescription entityForName:@"Waiter" inManagedObjectContext:appDelegate.managedObjectContext];
@@ -42,6 +43,7 @@
             
             Waiter *initialWaiter = [[Waiter alloc]initWithEntity:waiterEntity insertIntoManagedObjectContext:appDelegate.managedObjectContext];
             initialWaiter.name = NSLocalizedString(@"John Smith", nil);
+            initialWaiter.restaurant = aRestaurant;
             [aRestaurant addStaffObject:initialWaiter];
             
             [appDelegate.managedObjectContext save:&error];
@@ -50,4 +52,5 @@
     }
     return self.restaurant;
 }
+
 @end
